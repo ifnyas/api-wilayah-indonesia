@@ -34,7 +34,7 @@ class Repository
 
     public function getProvinces(): array
     {
-        return $this->mapCsv('provinces.csv', ['nid','parent_nid','name','serial','type','lat','lng','status']);
+        return $this->mapCsv('provinces.csv', ['id', 'name']);
     }
 
     public function cache(string $file)
@@ -48,7 +48,7 @@ class Repository
 
     public function getRegenciesByProvinceId(string $provinceId): array
     {
-        return $this->mapCsv('regencies.csv', ['nid','parent_nid','name','serial','type','lat','lng','status'], function ($row) use ($provinceId) {
+        return $this->mapCsv('regencies.csv', ['id', 'province_id', 'name', 'lat', 'lng'], function ($row) use ($provinceId) {
             return $row[1] == $provinceId;
         });
     }
@@ -62,7 +62,7 @@ class Repository
 
     public function getVillagesByDistrictId(string $districtId): array
     {
-        return $this->mapCsv('villages.csv', ['id', 'district_id', 'name'], function ($row) use ($districtId) {
+        return $this->mapCsv('villages.csv', ['id', 'district_id', 'name',], function ($row) use ($districtId) {
             return $row[1] == $districtId;
         });
     }

@@ -41,19 +41,19 @@ class Generator
             $this->generateApi("/province/{$province['id']}.json", $province);
 
             foreach ($regencies as $regency) {
-                $districts = $this->repository->getDistrictsByRegencyId($regency['id']);
-                $this->generateApi("/districts/{$regency['id']}.json", $districts);
                 $this->generateApi("/regency/{$regency['id']}.json", $regency);
+          
+                // $districts = $this->repository->getDistrictsByRegencyId($regency['id']);
+                // $this->generateApi("/districts/{$regency['id']}.json", $districts);
+                // foreach ($districts as $district) {
+                //     $villages = $this->repository->getVillagesByDistrictId($district['id']);
+                //     $this->generateApi("/villages/{$district['id']}.json", $villages);
+                //     $this->generateApi("/district/{$district['id']}.json", $district);
 
-                foreach ($districts as $district) {
-                    $villages = $this->repository->getVillagesByDistrictId($district['id']);
-                    $this->generateApi("/villages/{$district['id']}.json", $villages);
-                    $this->generateApi("/district/{$district['id']}.json", $district);
-
-                    foreach ($villages as $village) {
-                        $this->generateApi("/village/{$village['id']}.json", $village);
-                    }
-                }
+                //     foreach ($villages as $village) {
+                //         $this->generateApi("/village/{$village['id']}.json", $village);
+                //     }
+                // }
             }
         }
     }
